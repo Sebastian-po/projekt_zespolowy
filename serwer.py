@@ -19,7 +19,7 @@ def start_http_server():
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(ssid, password)
-    # Wait for connect or fail
+    # Oczekiwanie na połączenie
     max_wait = 10
     while max_wait > 0:
         if wlan.status() < 0 or wlan.status() >= 3:
@@ -28,7 +28,7 @@ def start_http_server():
         print('waiting for connection...')
         time.sleep(1)
     
-# Handle connection error
+# blad polaczenia
     if wlan.status() != 3:
         raise RuntimeError('network connection failed')
     else:
@@ -38,7 +38,7 @@ def start_http_server():
         print('Server URL: http://%s:%d' % (status[0], addr[1]))
         
         
-    # Open socket
+    # otworzenie socketu
     s = socket.socket()
     s.bind(addr)
     s.listen(1)
